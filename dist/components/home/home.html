@@ -1,0 +1,76 @@
+<div class="col-md-3 pull-right-lg page-header">
+<ins class="adsbygoogle"
+     style="display:inline-block;width:300px;height:250px"
+     data-ad-client="ca-pub-2585007852000571"
+     data-ad-slot="6638869941"></ins>
+</div>
+
+<div class="col-md-6 col-md-offset-3"><h1 class="text-center">Get matched to a perfect suburb</h1><h2 class="text-center small">Current supporting Queensland suburbs</h2></div>
+
+<div class="page-header alert alert-warning col-md-6 col-md-offset-3"><p class="text-center"> Fill in your details below and hit 'Submit' to get your results.</p></div>
+
+<form class="col-md-6 col-md-offset-3" #f="form" [ng-form-model]="searchForm" (ng-submit)="searchSubmit(f.value)">
+  <div class="form-group" [ng-class]="{'has-error':!f.form.valid}">
+    <label for="home">Postcode frequently travelled to</label>
+    <input type="number" class="form-control" name="home" placeholder="eg: 4000" ng-control="homepostcode" #homepostcode="form" required (keyup)="handleKeyUp($event)"/>
+    <div *ng-if="!homepostcode.valid" class="help-block">Postcode required</p></div>
+  </div>
+  <div class="form-group">
+    <label for="age">Your age range</label>
+    <select name="age" class="form-control" ng-control="age" #age="form">
+      <option *ng-for="#age_range of seek_age_range_list; #age_range_index = index" value="{{age_range_index}}">{{age_range}}</option>
+    </select>
+    <div *ng-if="!age.valid" class="help-block">Select an age range you prefer to life with</p></div>
+  </div>
+  <div class="form-group">
+    <label class="control-label">Maximum distance away</label>
+    <div class="btn-group btn-group-justified" data-toggle="buttons">
+      <label class="btn btn-primary" [ng-class]="{active:radiogroup_distance == '10'}">
+        <input type="radio" name="distance" value="10" checked="checked" (click)="radiogroup_distance = '10'"> 10km
+      </label>
+      <label class="btn btn-primary" [ng-class]="{active:radiogroup_distance == '20'}">
+        <input type="radio" name="distance" value="20" (click)="radiogroup_distance = '20'"> 20km
+      </label>
+      <label class="btn btn-primary" [ng-class]="{active:radiogroup_distance == '30'}">
+        <input type="radio" name="distance" value="30" (click)="radiogroup_distance = '30'"> 30km
+      </label>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label">Train stations</label>
+    <div class="btn-group btn-group-justified" data-toggle="buttons">
+      <label class="btn btn-default" [ng-class]="{active:radiogroup_train == 'no'}">
+        <input type="radio" name="train" value="no" (click)="radiogroup_train = 'no'"> No preference
+      </label>
+      <label class="btn btn-default" [ng-class]="{active:radiogroup_train == 'yes'}">
+        <input type="radio" name="train" value="yes" (click)="radiogroup_train = 'yes'"> Must have
+      </label>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label">Nightlife (licenced venues)</label>
+    <div class="btn-group btn-group-justified" data-toggle="buttons">
+      <label class="btn btn-default active" [ng-class]="{active:radiogroup_nightlife == 'no'}">
+        <input type="radio" name="nightlife" value="no" checked="checked" (click)="radiogroup_nightlife = 'no'"> No preference
+      </label>
+      <label class="btn btn-default" [ng-class]="{active:radiogroup_nightlife == 'yes'}">
+        <input type="radio" name="nightlife" value="yes" (click)="radiogroup_nightlife = 'yes'"> Must have
+      </label>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="church">Type of church nearby</label>
+    <select name="church" class="form-control" ng-control="church" #age="form">
+      <option *ng-for="#church_type of church_list" value="{{church_type}}">{{church_type}}</option>
+    </select>
+  </div>
+  <button [disabled]="!f.form.valid" type="submit" class="btn btn-default">Submit</button>
+</form>
+
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2585007852000571"
+     data-ad-slot="9012083549"
+     data-ad-format="auto"></ins>

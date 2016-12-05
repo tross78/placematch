@@ -1,0 +1,56 @@
+<div class="col-md-2"><h3><a href="/">New search</a></h3></div>
+<div class="col-md-8">
+  <div [hidden]="spinnerHidden"><img  class="img-responsive center-block" src="./images/spinner.gif"/></div>
+  <div *ng-for="#res of result.results" class="media">
+    <div class="media-left col-xs-6 col-sm-6">
+      <a href="#" style="border:2px solid grey; width:300px;height:300px;display:inline-block">
+        <iframe
+          width="297"
+          height="297"
+          frameborder="0" style="border:0"
+          src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBT9ycxX9DHrrD8L18ZsTt-UtQdGUWobeU&q={{res.suburb}}, {{res.postcode}}, Australia" allowfullscreen>
+        </iframe>
+      </a>
+    </div>
+    <div class="media-body">
+      <h4 class="media-heading" style="margin-top:20px;">{{res.suburb}}</h4>
+      <table class="table">
+        <thead>
+          <tr>
+            <td>Postcode
+            </td>
+            <td>
+              {{res.postcode}}
+            </td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Find rentals</td>
+            <td><a href="http://www.realestate.com.au/rent/in-{{res.postcode}}/list-1">Realestate.com.au</a></td>
+          </tr>
+          <tr>
+            <td>Average weekly rent (2 bedroom house)
+            </td>
+            <td>${{getWeeklyRent(res.average_weekly_rent)}}</td>
+          </tr>
+          <tr>
+            <td>Number of licenced venues
+            </td>
+            <td>{{res.nightlifecount}}</td>
+          </tr>
+          <tr>
+            <td>Crime rate
+            </td>
+            <td>{{calcCrimeRate(res.total_offences_sum)}}</td>
+          </tr>
+          <tr>
+            <td>Preferred age range</td>
+            <td>{{getAgeRange(res.range_1_pc, res.range_2_pc, res.range_3_pc, res.range_4_pc, res.range_5_pc)}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div *ng-if="result.results.length == 0 && spinnerHidden" class="text-center"><h2>No results</h2><h3><a href="/">New search</a></h3></div>
+</div>
